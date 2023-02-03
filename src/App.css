@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.btn {
+  background: #20232aaf;
+  color: inherit;
+  border: none;
+  border-radius: 1rem;
+  margin: 0.2rem;
+  padding: 0.4rem;
+  font: inherit;
+  font-size: 0.6rem;
+  font-family: "Times New Roman", Times, serif;
+  cursor: pointer;
+  outline: inherit;
+  box-shadow: 2px 2px 2px #0000006c;
+}
+.btn:hover {
+  color: orange;
+}
+h1 {
+  font-family: "Times New Roman", Times, serif;
+}
+form {
+  font-family: "Times New Roman", Times, serif;
+}

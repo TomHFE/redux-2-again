@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // create slice
 const initialState = {
-  id: 1,
   nextId: 2,
   data: {
     1: {
       content: "Content 1",
       completed: false,
-      id: 1,
     },
   },
 };
@@ -18,10 +16,9 @@ export const toDoSlice = createSlice({
 
   // intialise counter
   initialState: initialState,
-
-  // create 4 reducers one which increases by payload one that decreases by payload one which adds 5% one which decreases by 15%
-
+  // initialise reducers
   reducers: {
+    // addtodo takes in payload from app.js and creates a new object
     addToDo: (state, action) => {
       state.data = {
         ...state.data,
@@ -30,40 +27,39 @@ export const toDoSlice = createSlice({
           completed: false,
         },
       };
-      state.id += 1;
       state.nextId += 1;
     },
+    // edittodo takes in payload from app.js and makes changes to current object
     editToDo: (state, action) => {
-      // state.data[action.id].content = action.payload;
-      let id = state.indexOf(action.payload.id);
-      const initialData = [...state.data.content];
-      let finalData = initialData.splice(id, 1, action.payload.content);
       state.data = {
         ...state.data,
-        store.data = finalData,
-
-      }
-        // [action.payload.id]: {
-        //   content: action.payload.content,
-        // },
+        [action.payload.id]: {
+          content: action.payload.content,
+          completed: action.payload.completed,
+        },
+      };
     },
-
-    // completeToDo: (state, action) => {
-    //   return (
-    //     (state.nextId = state.nextId),
-    //     (state.data.content = state.data.content),
-    //     (state.data.completed = !state.data.completed)
-    //   );
-    // },
-    // removeToDo: (state, action) => {
-    //   return state.filter((todo, i) => i !== action.payload.nextId);
-    // },
+    // completetodo takes in payload from app.js and toggles relevant objects completed state
+    completeToDo: (state, action) => {
+      state.data = {
+        ...state.data,
+        [action.payload.id]: {
+          content: action.payload.content,
+          completed: action.payload.completed,
+        },
+      };
+    },
+    // removetodo takes in payload from app.js and deletes relevant object from state
+    removeToDo: (state, action) => {
+      delete state.data[action.payload];
+    },
   },
 });
 
 // export the reducers
 
-export const { addToDo, editToDo } = toDoSlice.actions;
+export const { addToDo, editToDo, completeToDo, removeToDo } =
+  toDoSlice.actions;
 
 // export counterslice
 
